@@ -1,0 +1,15 @@
+//abstracts
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+
+//base
+@import "./base/reset.scss";
+
+//layout
+@import "./layout/header/header";
+@import "./layout/sidebar/sidebar";
+
+body {
+  margin: $margin-body;
+  background-color: $color-background;
+}

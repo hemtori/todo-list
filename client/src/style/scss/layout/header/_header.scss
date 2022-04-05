@@ -1,0 +1,13 @@
+header {
+  @include flex(space-between);
+}
+
+.header__title {
+  font-size: $font-header;
+  margin: $margin-header;
+}
+
+.sidebar__menu-button {
+  border: none;
+  background-color: transparent;
+}
