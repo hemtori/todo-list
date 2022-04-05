@@ -145,9 +145,15 @@ button {
   cursor: pointer;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 0px 80px;
 }
 
 .header__title {
@@ -156,12 +162,57 @@ header {
 }
 
 .sidebar__menu-button {
+  height: max-content;
   border: none;
   background-color: transparent;
+  z-index: 2;
+}
+
+aside {
+  float: right;
+}
+
+.sidebar__list {
+  width: 452px;
+  height: 1024px;
+  padding: 80px 80px 80px 40px;
+  background-color: #fff;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sidebar__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 332px;
+  height: 137px;
+  background-color: #edf9e7;
+  font-size: 16px;
+}
+.sidebar__item--profile {
+  width: 40px;
+  height: 40px;
+  margin: 16px;
+}
+.sidebar__item section {
+  margin: 16px 16px 16px 0px;
+}
+.sidebar__item--activity {
+  width: 244px;
+  height: auto;
+  white-space: normal;
+}
+.sidebar__item--time-stamp {
+  font-size: 14px;
+  color: #828282;
+}
+.sidebar__item--nickname, .sidebar__item--activity, .sidebar__item--time-stamp {
+  padding: 8px 0px;
 }
 
 body {
-  margin: 0px 80px;
   background-color: #e5e5e5;
 }
 
