@@ -2,6 +2,24 @@ import { $ } from "../utils/utils.js";
 import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
 
+const identifyCategory = (activity) => {
+  switch (activity.action) {
+    case "등록":
+      return `${activity.category[0]}에 ${activity.title}${appendEulReul(activity.title)} 
+      ${activity.action}하였습니다.`;
+    case "이동":
+      return `${activity.title}${appendEulReul(activity.title)} ${activity.category[0]}에서 
+      ${activity.category[1]}${appenRoEro(activity.category[1])} ${activity.action}하였습니다.`;
+    case "삭제":
+      return `${activity.category}에서 ${activity.title}${appendEulReul(activity.title)} 
+      ${activity.action}하였습니다.`;
+    case "변경":
+      return `${activity.category}에서 ${activity.title}이 ${action}되었습니다.`;
+    default:
+      return "동작이 잘못 되었습니다.";
+  }
+};
+
 const createHTML = () => {
   const sidebarList = sidebarData.reduce(
     (acc, cur) =>
