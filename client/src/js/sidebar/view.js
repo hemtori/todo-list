@@ -87,8 +87,8 @@ const render = (parent) => {
 const toggleSidebar = () => {
   const sidebar = $("aside");
   const sidebarMenuBtn = $(".sidebar__menu-button img");
+  sidebarMenuBtn.src = sidebar.classList.contains("show") ? "./svg/icon-menu.svg" : "./svg/icon-delete.svg";
   sidebar.classList.toggle("show");
-  sidebarMenuBtn.src = sidebar.classList.contains("show") ? "./svg/icon-delete.svg" : "./svg/icon-menu.svg";
 };
 
 const bindModel = () => {
