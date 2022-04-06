@@ -2,6 +2,22 @@ import { $ } from "../utils/utils.js";
 import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
 
+const calcTimeForToday = (writeTimeValue) => {
+  const today = new Date();
+  const writeTime = new Date(writeTimeValue);
+  const timeDifference = today.getTime() - writeTime.getTime();
+
+  const minuteDifference = Math.floor(timeDifference / 1000 / 60);
+  if (minuteDifference < 1) return "방금전";
+  else if (minuteDifference < 60) return `${minuteDifference}분전`;
+
+  const HourDifference = Math.floor(minuteDifference / 60);
+  if (HourDifference < 24) return `${HourDifference}시간전`;
+
+  const DayDifference = Math.floor(HourDifference / 60 / 24);
+  if (DayDifference < 365) return `${DayDifference}일전`;
+};
+
 const identifyCategory = (activity) => {
   switch (activity.action) {
     case "등록":
