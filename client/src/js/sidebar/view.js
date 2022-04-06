@@ -77,7 +77,7 @@ const createHTML = () => {
         </li>`,
     ""
   );
-  return `<ul class="sidebar__list">${sidebarList}</ul>`;
+  return `<ul class="sidebar__list"><div class="sidebar__scroll">${sidebarList}</div></ul>`;
 };
 
 const render = (parent) => {
