@@ -246,6 +246,10 @@ aside {
   padding-top: 24px;
   padding-left: 80px;
 }
+.column__list--delete-button:hover {
+  cursor: pointer;
+  filter: invert(41%) sepia(95%) saturate(2569%) hue-rotate(332deg) brightness(100%) contrast(110%);
+}
 .column__item {
   display: flex;
   justify-content: flex-start;
@@ -364,6 +368,10 @@ aside {
   font-style: normal;
   color: #bdbdbd;
   line-height: 17px;
+}
+.column__task--add-button:hover {
+  cursor: pointer;
+  filter: invert(48%) sepia(97%) saturate(5052%) hue-rotate(193deg) brightness(90%) contrast(101%);
 }
 
 body {
