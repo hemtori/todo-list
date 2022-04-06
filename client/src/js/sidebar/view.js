@@ -2,6 +2,31 @@ import { $ } from "../utils/utils.js";
 import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
 
+const getFinalConsonant = (object) => {
+  const finalWord = object.length - 1;
+  const fianlCharCode = object.charCodeAt(finalWord);
+  const finalConsonantCode = (fianlCharCode - 44032) % 28;
+  return finalConsonantCode;
+};
+
+const hasFinalConsonant = (object) => {
+  const finalConsonantCode = getFinalConsonant(object);
+  return finalConsonantCode !== 0;
+};
+
+const appendEulReul = (object) => {
+  return hasFinalConsonant(object) ? "을" : "를";
+};
+
+const appenRoEro = (object) => {
+  const rieul = 8;
+  return hasFinalConsonant(object) //
+    ? getFinalConsonant(object) === rieul
+      ? "로"
+      : "으로"
+    : "로";
+};
+
 const calcTimeForToday = (writeTimeValue) => {
   const today = new Date();
   const writeTime = new Date(writeTimeValue);
