@@ -22,6 +22,10 @@ const mouseDownHandler = (event) => {
   const taskElement = target.closest("li");
   const copyTaskElement = createCopyTask(taskElement);
   document.body.appendChild(copyTaskElement);
+
+  const shiftCoordinate = getShiftCoordinate(event, taskElement);
+  const moveAtFunc = createMoveAtFunc(shiftCoordinate);
+  moveAtFunc(copyTaskElement, event);
 };
 
 const createCopyTask = (taskElement) => {
@@ -46,4 +50,18 @@ const createTaskHTML = ([header, comment, author]) => {
       <textarea readonly class="column__task--comment" spellcheck="false">${comment.value}</textarea>
       <span class="column__task--author">${author.innerText}</span>
     </section>`;
+};
+
+const getShiftCoordinate = (event, taskElement) => {
+  const shiftX = event.clientX - taskElement.getBoundingClientRect().left;
+  const shiftY = event.clientY - taskElement.getBoundingClientRect().top;
+  return { shiftX: shiftX, shiftY: shiftY };
+};
+
+const createMoveAtFunc = (coordinate) => {
+  const { shiftX, shiftY } = coordinate;
+  return (element, { pageX, pageY }) => {
+    element.style.left = pageX - shiftX + "px";
+    element.style.top = pageY - shiftY + "px";
+  };
 };
