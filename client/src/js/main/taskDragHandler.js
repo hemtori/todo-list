@@ -12,10 +12,12 @@ const setMouseEvent = (element) => {
   element.addEventListener("mousedown", mouseDownHandler);
 };
 
+const isDeleteButton = (target) => target.classList.contains("column__task--delete-button");
+
 const mouseDownHandler = (event) => {
   const target = event.target;
 
-  if (target.classList.contains("column__task--delete-button")) {
+  if (isDeleteButton(target)) {
     return;
   }
 
@@ -36,6 +38,7 @@ const createCopyTask = (taskElement) => {
   copyTaskElement.dataset.index = taskElement.dataset.index;
   copyTaskElement.classList.add("column__task--item", "dragging");
   copyTaskElement.innerHTML = createTaskHTML([...sectionElement.children]);
+  copyTaskElement.addEventListener("mouseup", mouseUpHandler);
   return copyTaskElement;
 };
 
@@ -78,4 +81,17 @@ const setDocumentEvent = (moveAtFunc) => {
 const mouseMoveHandler = (event) => {
   const target = event.currentTarget;
   target.moveAt(event.pageX, event.pageY);
+};
+
+const mouseUpHandler = (event) => {
+  const target = event.target;
+
+  if (isDeleteButton(target)) {
+    return;
+  }
+
+  const taskElement = target.closest("li");
+  document.removeEventListener("mousemove", mouseMoveHandler);
+  taskElement.removeEventListener("mouseup", mouseUpHandler);
+  taskElement.remove();
 };
