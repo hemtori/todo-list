@@ -20,7 +20,7 @@ const appendEulReul = (object) => {
   return hasFinalConsonant(object) ? "을" : "를";
 };
 
-const appenRoEro = (object) => {
+const appendRoEro = (object) => {
   const rieul = 8;
   return hasFinalConsonant(object) //
     ? getFinalConsonant(object) === rieul
@@ -29,20 +29,24 @@ const appenRoEro = (object) => {
     : "로";
 };
 
-const calcTimeForToday = (writeTimeValue) => {
+const calcTimeForToday = (timeStampValue) => {
   const today = new Date();
-  const writeTime = new Date(writeTimeValue);
-  const timeDifference = today.getTime() - writeTime.getTime();
+  const timeStamp = new Date(timeStampValue);
+  const timeDifference = today.getTime() - timeStamp.getTime();
+  const [milliSecond, second, minute, hour, day, year] = [1000, 1, 60, 60, 24, 365];
 
-  const minuteDifference = Math.floor(timeDifference / 1000 / 60);
-  if (minuteDifference < 1) return "방금전";
-  else if (minuteDifference < 60) return `${minuteDifference}분전`;
+  const minuteDifference = Math.floor(timeDifference / milliSecond / minute);
+  if (minuteDifference < second) return "방금전";
 
-  const HourDifference = Math.floor(minuteDifference / 60);
-  if (HourDifference < 24) return `${HourDifference}시간전`;
+  if (minuteDifference < hour) return `${minuteDifference}분전`;
 
-  const DayDifference = Math.floor(HourDifference / 60 / 24);
-  if (DayDifference < 365) return `${DayDifference}일전`;
+  const HourDifference = Math.floor(minuteDifference / hour);
+  if (HourDifference < day) return `${HourDifference}시간전`;
+
+  const DayDifference = Math.floor(HourDifference / day);
+  if (DayDifference < year) return `${DayDifference}일전`;
+
+  return `${DayDifference}년전`;
 };
 
 const identifyCategory = (activity) => {
@@ -52,7 +56,7 @@ const identifyCategory = (activity) => {
       ${activity.action}하였습니다.`;
     case "이동":
       return `${activity.title}${appendEulReul(activity.title)} ${activity.category[0]}에서 
-      ${activity.category[1]}${appenRoEro(activity.category[1])} ${activity.action}하였습니다.`;
+      ${activity.category[1]}${appendRoEro(activity.category[1])} ${activity.action}하였습니다.`;
     case "삭제":
       return `${activity.category}에서 ${activity.title}${appendEulReul(activity.title)} 
       ${activity.action}하였습니다.`;
