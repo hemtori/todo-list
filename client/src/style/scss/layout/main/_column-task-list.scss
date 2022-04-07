@@ -23,7 +23,7 @@
     @include flex(flex-start, flex-start);
     flex-direction: row;
     margin-bottom: 16px;
-    width: 280px;
+    width: inherit;
     min-height: 76px;
     padding: 16px;
     background: $color-white;
@@ -72,4 +72,31 @@
       filter: invert(48%) sepia(97%) saturate(5052%) hue-rotate(193deg) brightness(90%) contrast(101%);
     }
   }
+
+  &--button {
+    @include flex(space-between);
+    button {
+      @include font(14px, 700);
+      color: $color-white;
+      width: 134px;
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+    }
+  }
+
+  &--cancle-button {
+    background-color: $color-silver;
+    margin-right: 8px;
+  }
+
+  &--accent-button {
+    background-color: $color-blue;
+  }
+}
+
+.section__header {
+  width: 100%;
+  @include flex(space-between);
 }

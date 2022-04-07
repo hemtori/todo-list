@@ -256,7 +256,7 @@ aside {
   align-items: center;
   flex-direction: column;
   width: 308px;
-  padding-right: 16px;
+  margin-right: 16px;
 }
 .column__item--title {
   display: flex;
@@ -320,7 +320,7 @@ aside {
   align-items: flex-start;
   flex-direction: row;
   margin-bottom: 16px;
-  width: 280px;
+  width: inherit;
   min-height: 76px;
   padding: 16px;
   background: #fff;
@@ -372,6 +372,37 @@ aside {
 .column__task--add-button:hover {
   cursor: pointer;
   filter: invert(48%) sepia(97%) saturate(5052%) hue-rotate(193deg) brightness(90%) contrast(101%);
+}
+.column__task--button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.column__task--button button {
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  color: #fff;
+  width: 134px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+}
+.column__task--cancle-button {
+  background-color: #e0e0e0;
+  margin-right: 8px;
+}
+.column__task--accent-button {
+  background-color: #0075de;
+}
+
+.section__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 body {
