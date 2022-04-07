@@ -56,18 +56,19 @@ export class List {
     const list = target.closest(".column__item").querySelector(".column__task--list");
     const isAddButton = target.classList.contains("column__task--add-button");
     if (!isAddButton) return;
-    this.actiavation ? this.removeRegisterationCard(list) : this.addRegisterationCard(list);
+    this.task.registerationActivation ? this.removeRegisterationCard(list) : this.addRegisterationCard(list);
   }
 
   addRegisterationCard(list) {
-    this.actiavation = true;
+    this.task.registerationActivation = true;
     list.insertAdjacentHTML("afterbegin", this.task.createRegisterationCardHTML());
+    this.task.setClickEvent();
   }
 
   removeRegisterationCard(list) {
-    if (!this.actiavation) return;
+    if (!this.task.registerationActivation) return;
     const firstTask = list.querySelector(".column__task--item");
-    this.actiavation = false;
+    this.task.registerationActivation = false;
     firstTask.remove();
   }
 }

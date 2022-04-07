@@ -1,3 +1,5 @@
+import { $ } from "../utils/utils.js";
+
 export class Task {
   constructor(taskData) {
     this.taskData = taskData;
@@ -39,5 +41,25 @@ export class Task {
         </section>
       </li>
     `;
+  }
+
+  setClickEvent() {
+    const taskButton = $(".column__task--button");
+    taskButton.addEventListener("click", ({ target }) => {
+      this.handleClickEvent(target);
+    });
+  }
+
+  handleClickEvent(target) {
+    const list = target.closest(".column__task--list");
+    const isCancleButton = target.classList.contains("column__task--cancle-button");
+    if (!isCancleButton) return;
+    this.removeRegisterationCard(list);
+  }
+
+  removeRegisterationCard(list) {
+    this.registerationActivation = false;
+    const firstTask = list.querySelector(".column__task--item");
+    firstTask.remove();
   }
 }
