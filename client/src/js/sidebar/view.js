@@ -1,6 +1,7 @@
 import { $ } from "../utils/utils.js";
 import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
+import { profileImage, iconMenu, iconDelete } from "../constants/imagePath.js";
 
 const getFinalConsonant = (object) => {
   const koreanUnicode = 44032;
@@ -73,7 +74,7 @@ const createHTML = () => {
     (acc, cur) =>
       acc +
       `<li class="sidebar__item">
-          <img class="sidebar__item--profile" src="./svg/profile.svg" alt="profile" />
+          <img class="sidebar__item--profile" src="${profileImage}" alt="profile" />
           <section>
             <h3 class="sidebar__item--nickname">@sam</h3>
             <p class="sidebar__item--activity">
@@ -94,7 +95,7 @@ const render = (parent) => {
 const toggleSidebar = () => {
   const sidebar = $("aside");
   const sidebarMenuBtn = $(".sidebar__menu-button img");
-  sidebarMenuBtn.src = sidebar.classList.contains("show") ? "./svg/icon-menu.svg" : "./svg/icon-delete.svg";
+  sidebarMenuBtn.src = sidebar.classList.contains("show") ? iconMenu : iconDelete;
   sidebar.classList.toggle("show");
 };
 

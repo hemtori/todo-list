@@ -1,10 +1,11 @@
 import { $, debounce } from "../utils/utils.js";
 import { toggleActivation } from "../store/model.js";
+import { iconMenu } from "../constants/imagePath.js";
 
 const createHTML = () => {
   return `<h1 class="header__title">TO-DO LIST</h1>
       <button class="sidebar__menu-button">
-        <img src="./svg/icon-menu.svg" alt="icon-delete" />
+        <img src="${iconMenu}" alt="icon-menu" />
       </button>`;
 };
 
