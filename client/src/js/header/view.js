@@ -1,6 +1,7 @@
 import { $, debounce } from "../utils/utils.js";
 import { iconMenu, iconDelete } from "../constants/imagePath.js";
 import { subscribe, update } from "../store/activationStore.js";
+import * as ActivationStore from "../store/activationStore.js";
 
 const createHTML = () => {
   return `<h1 class="header__title">TO-DO LIST</h1>
@@ -33,5 +34,5 @@ const notify = (isShow) => {
 export const headInit = (parent) => {
   render(parent);
   setEvents();
-  subscribe("sidebar", notify);
+  ActivationStore.subscribe("sidebar", notify);
 };
