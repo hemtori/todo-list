@@ -11,6 +11,7 @@ export class List {
   init() {
     this.render(this.parent);
     this.setEvents();
+    this.task.setEvents();
   }
 
   render(parent) {

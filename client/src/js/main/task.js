@@ -1,4 +1,4 @@
-import { $ } from "../utils/utils.js";
+import { $, $$ } from "../utils/utils.js";
 
 export class Task {
   constructor(taskData) {
@@ -43,11 +43,29 @@ export class Task {
     `;
   }
 
+  setEvents() {
+    this.setTarget();
+    this.setInputEvent();
+  }
+
+  setTarget() {
+    this.columnTaskComments = $$(".column__task--comment");
+  }
+
+  setInputEvent() {
+    for (const element of this.columnTaskComments) {
+      element.addEventListener("input", ({ target }) => this.autosizeTextArea(target));
+    }
+  }
+
+  autosizeTextArea(target) {
+    target.style.height = "1px";
+    target.style.height = target.scrollHeight + "px";
+  }
+
   setClickEvent() {
     const taskButton = $(".column__task--button");
-    taskButton.addEventListener("click", ({ target }) => {
-      this.handleClickEvent(target);
-    });
+    taskButton.addEventListener("click", ({ target }) => this.handleClickEvent(target));
   }
 
   handleClickEvent(target) {
