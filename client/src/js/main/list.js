@@ -1,3 +1,5 @@
+import { $$ } from "../utils/utils.js";
+
 export class List {
   constructor(parent, title, task) {
     this.parent = parent;
@@ -8,6 +10,7 @@ export class List {
 
   init() {
     this.render(this.parent);
+    this.setEvents();
   }
 
   render(parent) {
@@ -31,5 +34,40 @@ export class List {
               ${this.task.createHTML()}
           </ul>
         </li>`;
+  }
+
+  setEvents() {
+    this.setTarget();
+    this.setClickEvent();
+  }
+
+  setTarget() {
+    const columnMenus = $$(".column__item--title-menu");
+    this.columnMenu = columnMenus[columnMenus.length - 1];
+  }
+
+  setClickEvent() {
+    this.columnMenu.addEventListener("click", ({ target }) => {
+      this.handleClickEvent(target);
+    });
+  }
+
+  handleClickEvent(target) {
+    const list = target.closest(".column__item").querySelector(".column__task--list");
+    const isAddButton = target.classList.contains("column__task--add-button");
+    if (!isAddButton) return;
+    this.actiavation ? this.removeRegisterationCard(list) : this.addRegisterationCard(list);
+  }
+
+  addRegisterationCard(list) {
+    this.actiavation = true;
+    list.insertAdjacentHTML("afterbegin", this.task.createRegisterationCardHTML());
+  }
+
+  removeRegisterationCard(list) {
+    if (!this.actiavation) return;
+    const firstTask = list.querySelector(".column__task--item");
+    this.actiavation = false;
+    firstTask.remove();
   }
 }

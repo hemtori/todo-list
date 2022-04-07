@@ -18,9 +18,9 @@ export const mainInit = async (parent) => {
   const todolistData = await TodolistStore.getTodolistData();
 
   for (const list of todolistData) {
-    for (const category in list) {
-      const task = new Task(list[category]);
-      new List(parent, category, task);
+    for (const title in list) {
+      const task = new Task(list[title]);
+      new List(parent, title, task);
     }
   }
 
