@@ -1,7 +1,7 @@
 import { $ } from "../utils/utils.js";
-import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
-import { profileImage, iconMenu, iconDelete } from "../constants/imagePath.js";
+import { profileImage } from "../constants/imagePath.js";
+import { subscribe } from "../store/activationStore.js";
 
 const getFinalConsonant = (object) => {
   const koreanUnicode = 44032;
@@ -92,18 +92,12 @@ const render = (parent) => {
   parent.innerHTML = createHTML();
 };
 
-const toggleSidebar = () => {
+const notify = () => {
   const sidebar = $("aside");
-  const sidebarMenuBtn = $(".sidebar__menu-button img");
-  sidebarMenuBtn.src = sidebar.classList.contains("show") ? iconMenu : iconDelete;
   sidebar.classList.toggle("show");
-};
-
-const bindModel = () => {
-  toggleActivation.toggleSidebar = toggleSidebar;
 };
 
 export const sidebarInit = (parent) => {
   render(parent);
-  bindModel();
+  subscribe("sidebar", notify);
 };
