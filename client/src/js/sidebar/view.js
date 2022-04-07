@@ -78,7 +78,7 @@ const createHTML = () => {
             <p class="sidebar__item--activity">
                ${identifyCategory(cur)}
             </p>
-            <p class="sidebar__item--time-stamp">${calcTimeForToday(cur.writeTime)}</p>
+            <p class="sidebar__item--time-stamp">${calcTimeForToday(cur.timeStamp)}</p>
           </section>
         </li>`,
     ""
