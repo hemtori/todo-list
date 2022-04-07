@@ -23,9 +23,9 @@ const mouseDownHandler = (event) => {
   const copyTaskElement = createCopyTask(taskElement);
   document.body.appendChild(copyTaskElement);
 
-  const shiftCoordinate = getShiftCoordinate(event, taskElement);
-  const moveAtFunc = createMoveAtFunc(shiftCoordinate);
-  moveAtFunc(copyTaskElement, event);
+  const moveAt = createMoveAtFunc(event, taskElement, copyTaskElement);
+  moveAt(event.pageX, event.pageY);
+  setDocumentEvent(moveAt);
 };
 
 const createCopyTask = (taskElement) => {
@@ -58,10 +58,24 @@ const getShiftCoordinate = (event, taskElement) => {
   return { shiftX: shiftX, shiftY: shiftY };
 };
 
-const createMoveAtFunc = (coordinate) => {
-  const { shiftX, shiftY } = coordinate;
-  return (element, { pageX, pageY }) => {
-    element.style.left = pageX - shiftX + "px";
-    element.style.top = pageY - shiftY + "px";
+const createMoveAtFunc = (event, originElement, copyElement) => {
+  const { shiftX, shiftY } = getShiftCoordinate(event, originElement);
+  return (pageX, pageY) => {
+    copyElement.style.left = pageX - shiftX + "px";
+    copyElement.style.top = pageY - shiftY + "px";
   };
+};
+
+const removeDocumentEvent = () => {
+  document.removeEventListener("mousemove", mouseMoveHandler);
+};
+
+const setDocumentEvent = (moveAtFunc) => {
+  document.moveAt = moveAtFunc;
+  document.addEventListener("mousemove", mouseMoveHandler);
+};
+
+const mouseMoveHandler = (event) => {
+  const target = event.currentTarget;
+  target.moveAt(event.pageX, event.pageY);
 };
