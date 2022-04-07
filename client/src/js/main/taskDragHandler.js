@@ -1,6 +1,6 @@
 import { iconDelete } from "../constants/imagePath.js";
 
-export const setTaskViewEvent = () => {
+export const setTaskDragEvent = () => {
   const taskList = [...document.querySelectorAll(".column__task--list")];
   taskList.forEach((taskList) => {
     const taskItems = [...taskList.children];
@@ -35,12 +35,15 @@ const createCopyTask = (taskElement) => {
   return copyTaskElement;
 };
 
-const createTaskHTML = ([title, comment, author]) => {
+const createTaskHTML = ([header, comment, author]) => {
+  const [title] = [...header.children];
   return /* html */ `
     <section>
-      <input readonly type="text" class="column__task--title" value="${title.value}" />
+      <div class="section__header">
+        <input readonly type="text" class="column__task--title" value="${title.value}" />
+        <img src="${iconDelete}" class="column__task--delete-button" />
+      </div>
       <textarea readonly class="column__task--comment" spellcheck="false">${comment.value}</textarea>
       <span class="column__task--author">${author.innerText}</span>
-    </section>
-    <img src="${iconDelete}" class="column__task--delete-button" />`;
+    </section>`;
 };

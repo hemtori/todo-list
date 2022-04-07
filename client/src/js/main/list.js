@@ -57,19 +57,19 @@ export class List {
     const list = target.closest(".column__item").querySelector(".column__task--list");
     const isAddButton = target.classList.contains("column__task--add-button");
     if (!isAddButton) return;
-    this.task.registerationActivation ? this.removeRegisterationCard(list) : this.addRegisterationCard(list);
+    this.task.registrationActivation ? this.removeRegistrationCard(list) : this.addRegistrationCard(list);
   }
 
-  addRegisterationCard(list) {
-    this.task.registerationActivation = true;
-    list.insertAdjacentHTML("afterbegin", this.task.createRegisterationCardHTML());
+  addRegistrationCard(list) {
+    this.task.registrationActivation = true;
+    list.insertAdjacentHTML("afterbegin", this.task.createRegistrationCardHTML());
     this.task.setClickEvent();
   }
 
-  removeRegisterationCard(list) {
-    if (!this.task.registerationActivation) return;
+  removeRegistrationCard(list) {
+    if (!this.task.registrationActivation) return;
     const firstTask = list.querySelector(".column__task--item");
-    this.task.registerationActivation = false;
+    this.task.registrationActivation = false;
     firstTask.remove();
   }
 }

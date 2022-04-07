@@ -25,7 +25,7 @@ export class Task {
     );
   }
 
-  createRegisterationCardHTML() {
+  createRegistrationCardHTML() {
     return `
       <li class="column__task--item" data-index="0">
         <section>
@@ -35,7 +35,7 @@ export class Task {
           </div>
           <textarea readonly class="column__task--comment" spellcheck="false">input 태그 실습</textarea>
           <div class="column__task--button">
-            <button class="column__task--cancle-button">취소</button>
+            <button class="column__task--cancel-button">취소</button> 
             <button class="column__task--accent-button">등록</button>
           </div>
         </section>
@@ -58,6 +58,8 @@ export class Task {
     }
   }
 
+  setDragAndDropEvent() {}
+
   autosizeTextArea(target) {
     target.style.height = "1px";
     target.style.height = target.scrollHeight + "px";
@@ -70,13 +72,13 @@ export class Task {
 
   handleClickEvent(target) {
     const list = target.closest(".column__task--list");
-    const isCancleButton = target.classList.contains("column__task--cancle-button");
-    if (!isCancleButton) return;
-    this.removeRegisterationCard(list);
+    const isCancelButton = target.classList.contains("column__task--cancel-button");
+    if (!isCancelButton) return;
+    this.removeRegistrationCard(list);
   }
 
-  removeRegisterationCard(list) {
-    this.registerationActivation = false;
+  removeRegistrationCard(list) {
+    this.registrationActivation = false;
     const firstTask = list.querySelector(".column__task--item");
     firstTask.remove();
   }
