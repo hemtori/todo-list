@@ -11,7 +11,6 @@ export class List {
   init() {
     this.render(this.parent);
     this.setEvents();
-    this.task.setEvents();
   }
 
   render(parent) {
@@ -21,6 +20,7 @@ export class List {
 
   createHTML(title) {
     return `<li class="column__item" data-title="${title}">
+    <div class="task__scroll">
           <div class="column__item--title">
             <div class="column__item--title-text">
               <h2 class="column__title">${title}</h2>
@@ -34,12 +34,14 @@ export class List {
           <ul class="column__task--list">
               ${this.task.createHTML()}
           </ul>
+          </div>
         </li>`;
   }
 
   setEvents() {
     this.setTarget();
     this.setClickEvent();
+    this.task.setInputEvent();
   }
 
   setTarget() {
@@ -57,19 +59,19 @@ export class List {
     const list = target.closest(".column__item").querySelector(".column__task--list");
     const isAddButton = target.classList.contains("column__task--add-button");
     if (!isAddButton) return;
-    this.task.registerationActivation ? this.removeRegisterationCard(list) : this.addRegisterationCard(list);
+    this.task.registrationActivation ? this.removeRegistrationCard(list) : this.addRegistrationCard(list);
   }
 
-  addRegisterationCard(list) {
-    this.task.registerationActivation = true;
-    list.insertAdjacentHTML("afterbegin", this.task.createRegisterationCardHTML());
-    this.task.setClickEvent();
+  addRegistrationCard(list) {
+    list.insertAdjacentHTML("afterbegin", this.task.createRegistrationCardHTML());
+    this.task.registrationActivation = true;
+    this.task.setEvents();
   }
 
-  removeRegisterationCard(list) {
-    if (!this.task.registerationActivation) return;
+  removeRegistrationCard(list) {
+    if (!this.task.registrationActivation) return;
     const firstTask = list.querySelector(".column__task--item");
-    this.task.registerationActivation = false;
+    this.task.registrationActivation = false;
     firstTask.remove();
   }
 }

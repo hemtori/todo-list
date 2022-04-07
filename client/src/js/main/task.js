@@ -25,17 +25,17 @@ export class Task {
     );
   }
 
-  createRegisterationCardHTML() {
+  createRegistrationCardHTML() {
     return `
-      <li class="column__task--item" data-index="0">
+      <li class="column__task--item registration-card inactivation" data-index="0">
         <section>
           <div class="section__header">
-            <input readonly type="text" class="column__task--title" value="HTML/CSS 공부하기" />
+            <input type="text" class="column__task--title" placeholder="제목을 입력하세요" />
             <img src="./svg/icon-delete.svg" class="column__task--delete-button" />
           </div>
-          <textarea readonly class="column__task--comment" spellcheck="false">input 태그 실습</textarea>
+          <textarea class="column__task--comment" spellcheck="false" placeholder="내용을 입력하세요"></textarea>
           <div class="column__task--button">
-            <button class="column__task--cancle-button">취소</button>
+            <button class="column__task--cancel-button">취소</button>
             <button class="column__task--accent-button">등록</button>
           </div>
         </section>
@@ -44,16 +44,14 @@ export class Task {
   }
 
   setEvents() {
-    this.setTarget();
+    this.setClickEvent();
     this.setInputEvent();
-  }
-
-  setTarget() {
-    this.columnTaskComments = $$(".column__task--comment");
+    this.setKeyupEvent();
   }
 
   setInputEvent() {
-    for (const element of this.columnTaskComments) {
+    const columnTaskComments = $$(".column__task--comment");
+    for (const element of columnTaskComments) {
       element.addEventListener("input", ({ target }) => this.autosizeTextArea(target));
     }
   }
@@ -70,14 +68,27 @@ export class Task {
 
   handleClickEvent(target) {
     const list = target.closest(".column__task--list");
-    const isCancleButton = target.classList.contains("column__task--cancle-button");
-    if (!isCancleButton) return;
-    this.removeRegisterationCard(list);
+    const isCancelButton = target.classList.contains("column__task--cancel-button");
+    if (!isCancelButton) return;
+    this.removeRegistrationCard(list);
   }
 
-  removeRegisterationCard(list) {
-    this.registerationActivation = false;
+  removeRegistrationCard(list) {
+    this.registrationActivation = false;
     const firstTask = list.querySelector(".column__task--item");
     firstTask.remove();
+  }
+
+  setKeyupEvent() {
+    const registrationCard = $(".registration-card");
+    registrationCard.addEventListener("keyup", () => this.handleKeyupEvent(registrationCard));
+  }
+
+  handleKeyupEvent(registrationCard) {
+    const title = registrationCard.querySelector("input");
+    const comment = registrationCard.querySelector("textarea");
+    if (comment.value.length > 500) comment.disabled = true;
+    if (title.value || comment.value) registrationCard.classList.remove("inactivation");
+    else registrationCard.classList.add("inactivation");
   }
 }
