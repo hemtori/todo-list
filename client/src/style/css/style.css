@@ -256,6 +256,7 @@ aside {
   align-items: center;
   flex-direction: column;
   width: 308px;
+  height: 786px;
   margin-right: 16px;
 }
 .column__item--title {
@@ -312,6 +313,7 @@ aside {
   align-items: center;
   flex-direction: column;
   width: 308px;
+  height: 100%;
   padding-top: 8px;
 }
 .column__task--item {
@@ -421,6 +423,10 @@ aside {
 
 .grabbing {
   cursor: grabbing;
+}
+
+.hidden {
+  display: none;
 }
 
 body {
