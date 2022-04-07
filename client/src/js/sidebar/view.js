@@ -3,9 +3,11 @@ import { toggleActivation } from "../store/model.js";
 import { sidebarData } from "../../../../server/data/sidebar.js";
 
 const getFinalConsonant = (object) => {
+  const koreanUnicode = 44032;
+  const finalConsonantCount = 28;
   const finalWord = object.length - 1;
-  const fianlCharCode = object.charCodeAt(finalWord);
-  const finalConsonantCode = (fianlCharCode - 44032) % 28;
+  const finalCharCode = object.charCodeAt(finalWord);
+  const finalConsonantCode = (finalCharCode - koreanUnicode) % finalConsonantCount;
   return finalConsonantCode;
 };
 
