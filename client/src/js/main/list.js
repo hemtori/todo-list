@@ -20,8 +20,8 @@ export class List {
   notify(value, title) {
     if (title !== this.title) return;
     if (!value && !this.target.querySelector(".registration-card")) {
-      const originRegisterationCard = $(".registration-card");
-      originRegisterationCard.remove();
+      const originRegistrationCard = $(".registration-card");
+      originRegistrationCard && originRegistrationCard.remove();
       return TodoListStore.update("registration", this.title);
     }
     value ? this.addRegistrationCard() : this.removeRegistrationCard();
