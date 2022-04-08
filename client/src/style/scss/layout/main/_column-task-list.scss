@@ -125,3 +125,8 @@
 .hidden {
   display: none;
 }
+
+.blur {
+  opacity: 0.5;
+  border: 1px solid $color-blue;
+}

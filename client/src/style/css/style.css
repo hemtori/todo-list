@@ -237,7 +237,9 @@ aside {
   font-size: 14px;
   color: #828282;
 }
-.sidebar__item--nickname, .sidebar__item--activity, .sidebar__item--time-stamp {
+.sidebar__item--nickname,
+.sidebar__item--activity,
+.sidebar__item--time-stamp {
   padding: 8px 0px;
 }
 
@@ -427,6 +429,11 @@ aside {
 
 .hidden {
   display: none;
+}
+
+.blur {
+  opacity: 0.5;
+  border: 1px solid #0075de;
 }
 
 body {
