@@ -130,3 +130,14 @@
   opacity: 0.5;
   border: 1px solid $color-blue;
 }
+
+.registration-card {
+  border: 1px solid $color-blue;
+  box-shadow: 0px 1px 30px 0px #e0e0e04d;
+}
+
+.inactivation {
+  .column__task--accent-button {
+    background-color: $color-light-blue;
+  }
+}
