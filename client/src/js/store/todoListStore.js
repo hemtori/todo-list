@@ -6,10 +6,12 @@ export const getTodoListData = () => {
 
 const subscribers = {
   //   registration: [list]
+  //   newTask: []
 };
 
 const activation = {
   //   registration: false
+  //   newTask:
 };
 
 export const subscribe = (key, notify) => {
@@ -33,6 +35,7 @@ export const subscribe = (key, notify) => {
   subscribers[key].push(notify);
 };
 
-export const update = (key, title) => {
+export const update = (key, title, newTask) => {
+  if (newTask) return (activation[key] = [newTask, title]);
   activation[key] = [!activation[key], title];
 };

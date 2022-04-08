@@ -1,5 +1,4 @@
 import { iconDelete } from "../constants/imagePath.js";
-import { $$ } from "../utils/utils.js";
 
 const taskItemClassName = "column__task--item";
 const taskListClassName = "column__task--list";
@@ -16,15 +15,9 @@ const taskCreator = (origin) => {
   };
 };
 
-export const setTaskDragEvent = () => {
-  const taskList = [...$$(`.${taskListClassName}`)];
-  taskList.forEach((taskList) => {
-    const taskItems = [...taskList.children];
-    taskItems.forEach(setMouseEvent);
-  });
-};
-
 export const setMouseEvent = (taskItem) => {
+  const isRegistrationCard = taskItem.classList.contains("registration-card");
+  if (isRegistrationCard) return;
   taskItem.addEventListener("mousedown", mouseDownHandler);
 };
 
