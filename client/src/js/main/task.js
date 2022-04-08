@@ -1,3 +1,4 @@
+import { iconAdd, iconDelete } from "../constants/imagePath.js";
 import { $, $$ } from "../utils/utils.js";
 
 export class Task {
@@ -39,7 +40,7 @@ export class Task {
               <section>
                 <div class="section__header">
                   <input readonly type="text" class="column__task--title" value="${title}" />
-                  <img src="./svg/icon-delete.svg" class="column__task--delete-button" />
+                  <img src=${iconAdd} class="column__task--delete-button" />
                 </div>
                 <textarea readonly class="column__task--comment" spellcheck="false">${comment}</textarea>
                 <span class="column__task--author">author by ${author}</span>
@@ -55,7 +56,7 @@ export class Task {
         <section>
           <div class="section__header">
             <input type="text" class="column__task--title" placeholder="제목을 입력하세요" />
-            <img src="./svg/icon-delete.svg" class="column__task--delete-button" />
+            <img src=${iconDelete} class="column__task--delete-button" />
           </div>
           <textarea class="column__task--comment" spellcheck="false" placeholder="내용을 입력하세요"></textarea>
           <div class="column__task--button">

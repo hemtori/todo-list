@@ -1,7 +1,7 @@
 import { fetchData } from "../utils/utils.js";
 
 export const getTodoListData = () => {
-  return fetchData("http://localhost:3000/todoList");
+  return fetchData("https://raw.githubusercontent.com/hemtori/todo-list/develop2/server/data/db.json");
 };
 
 const subscribers = {

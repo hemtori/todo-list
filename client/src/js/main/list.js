@@ -1,4 +1,5 @@
 import { $, $$ } from "../utils/utils.js";
+import { iconAdd, iconDelete } from "../constants/imagePath.js";
 import { Task } from "./task.js";
 import * as TodoListStore from "../store/todoListStore.js";
 
@@ -46,8 +47,8 @@ export class List {
               <div class="column__task--count">2</div>
             </div>
             <div class="column__item--title-menu">
-              <img src="./svg/icon-add.svg" class="column__task--add-button" />
-              <img src="./svg/icon-delete.svg" class="column__list--delete-button" />
+              <img src=${iconAdd} class="column__task--add-button" />
+              <img src=${iconDelete} class="column__list--delete-button" />
             </div>
           </div>
           <ul class="column__task--list"></ul>
