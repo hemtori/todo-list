@@ -1,33 +1,55 @@
 import { $, $$ } from "../utils/utils.js";
 
 export class Task {
-  constructor(taskData) {
+  constructor(title, taskData) {
+    this.title = title;
     this.taskData = taskData;
+    this.init();
   }
 
-  createHTML() {
-    if (!this.taskData) return "";
-    return this.taskData.reduce(
-      (acc, cur, index) =>
-        acc +
-        `<li class="column__task--item" data-index="${index}">
+  init() {
+    this.render();
+  }
+
+  render() {
+    const lists = $$(".column__item");
+    const position = this.taskData ? "beforeend" : "afterbegin";
+
+    for (const list of lists) {
+      if (list.dataset.title === this.title) {
+        list
+          .querySelector(".column__task--list")
+          .insertAdjacentHTML(
+            position,
+            this.taskData ? this.createHTML() : this.createRegistrationCardHTML()
+          );
+      }
+    }
+
+    this.registrationCard = $(".registration-card");
+  }
+
+  createHTML(taskData) {
+    taskData = taskData || this.taskData;
+    const { title, comment, author } = taskData;
+    return taskData
+      ? `<li class="column__task--item" data-title="${title}">
               <section>
                 <div class="section__header">
-                  <input readonly type="text" class="column__task--title" value="${cur.title}" />
+                  <input readonly type="text" class="column__task--title" value="${title}" />
                   <img src="./svg/icon-delete.svg" class="column__task--delete-button" />
                 </div>
-                <textarea readonly class="column__task--comment" spellcheck="false">${cur.comment}</textarea>
-                <span class="column__task--author">author by ${cur.author}</span>
+                <textarea readonly class="column__task--comment" spellcheck="false">${comment}</textarea>
+                <span class="column__task--author">author by ${author}</span>
               </section>
               
-            </li>`,
-      ""
-    );
+            </li>`
+      : "";
   }
 
   createRegistrationCardHTML() {
     return `
-      <li class="column__task--item registration-card inactivation" data-index="0">
+      <li class="column__task--item registration-card inactivation">
         <section>
           <div class="section__header">
             <input type="text" class="column__task--title" placeholder="제목을 입력하세요" />
@@ -62,14 +84,14 @@ export class Task {
   }
 
   setClickEvent() {
-    const taskButton = $(".column__task--button");
-    taskButton.addEventListener("click", ({ target }) => this.handleClickEvent(target));
+    this.registrationCard &&
+      this.registrationCard.addEventListener("click", ({ target }) => this.handleClickEvent(target));
   }
 
   handleClickEvent(target) {
+    const isTaskButton = target.closest(".column__task--button");
+    if (!isTaskButton) return;
     const list = target.closest(".column__task--list");
-    const isCancelButton = target.classList.contains("column__task--cancel-button");
-    if (!isCancelButton) return;
     this.removeRegistrationCard(list);
   }
 
@@ -80,8 +102,8 @@ export class Task {
   }
 
   setKeyupEvent() {
-    const registrationCard = $(".registration-card");
-    registrationCard.addEventListener("keyup", () => this.handleKeyupEvent(registrationCard));
+    this.registrationCard &&
+      this.registrationCard.addEventListener("keyup", () => this.handleKeyupEvent(registrationCard));
   }
 
   handleKeyupEvent(registrationCard) {
