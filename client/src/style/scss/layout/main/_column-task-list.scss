@@ -112,6 +112,25 @@
   @include flex(space-between);
 }
 
+.dragging {
+  position: absolute;
+  z-index: 1000;
+  cursor: grabbing;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.hidden {
+  display: none;
+}
+
+.blur {
+  opacity: 0.5;
+  border: 1px solid $color-blue;
+}
+
 .registration-card {
   border: 1px solid $color-blue;
   box-shadow: 0px 1px 30px 0px #e0e0e04d;
