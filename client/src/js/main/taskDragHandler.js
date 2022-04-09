@@ -55,7 +55,7 @@ const createCopyTask = (taskElement, isMoved = false) => {
   const copyTaskElement = document.createElement("li");
   copyTaskElement.style.width = "308px";
   copyTaskElement.ondragstart = () => false;
-  copyTaskElement.dataset.index = taskElement.dataset.index;
+  copyTaskElement.dataset.title = taskElement.dataset.title;
   copyTaskElement.classList.add(taskItemClassName);
   copyTaskElement.innerHTML = createTaskHTML([...sectionElement.children]);
   copyTaskElement.addEventListener("mouseup", mouseUpHandler);
