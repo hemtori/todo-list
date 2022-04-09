@@ -30,7 +30,7 @@ export class List {
     activation ? this.addRegistrationCard() : this.removeRegistrationCard();
   }
 
-  notifyNewTask(newTask, title) {
+  notifyNewTask(newTaskCount, title, newTask) {
     if (title !== this.title) return;
     this.task.push(new Task(this.title, newTask));
     TodoListStore.update("registration", this.title);

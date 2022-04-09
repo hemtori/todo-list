@@ -102,9 +102,12 @@ export class Task {
   handleClickEvent(target) {
     const isTaskButton = target.closest(".column__task--button");
     if (!isTaskButton) return;
+
     const isCancelButton = target.classList.contains("column__task--cancel-button");
     if (isCancelButton) return this.removeRegistrationCard();
 
+    const isInactivation = this.target.classList.contains("inactivation");
+    if (isInactivation) return;
     const title = this.target.querySelector("input").value;
     const comment = this.target.querySelector("textarea").value;
     const newTask = { title, comment, author: "web" };
@@ -122,7 +125,8 @@ export class Task {
   handleKeyupEvent() {
     const title = this.target.querySelector("input");
     const comment = this.target.querySelector("textarea");
-    if (comment.value.length > 500) comment.disabled = true;
+    const maxCommentNum = 500;
+    if (comment.value.length > maxCommentNum) comment.disabled = true;
     if (title.value || comment.value) this.target.classList.remove("inactivation");
     else this.target.classList.add("inactivation");
   }
