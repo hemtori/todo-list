@@ -36,7 +36,7 @@ const handleDeleteButtonClick = ({ listTitle, taskTitle }) => {
   TodoListStore.deleteListTask(listTitle, taskTitle);
 };
 
-export const deleteMenuInit = (taskInfo, cancelAlert) => {
+export const alertDeleteInit = (taskInfo, cancelAlert) => {
   render();
   setEvents(taskInfo, cancelAlert);
 };
