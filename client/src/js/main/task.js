@@ -1,7 +1,7 @@
 import { $$ } from "../utils/utils.js";
 import { iconDelete } from "../constants/imagePath.js";
-import { setMouseEvent } from "./taskDragHandler.js";
 import * as TodoListStore from "../store/todoListStore.js";
+import { deleteMenuInit } from "./deleteMenu.js";
 
 export class Task {
   constructor(listTitle, taskData) {
@@ -195,6 +195,7 @@ export class Task {
     this.deleteButton = this.target.querySelector(".column__task--delete-button");
     this.deleteButton.addEventListener("mouseover", this.handleMouseToggle.bind(this));
     this.deleteButton.addEventListener("mouseout", this.handleMouseToggle.bind(this));
+    this.deleteButton.addEventListener("click", this.handleDeleteButtonClick.bind(this));
   }
 
   handleMouseToggle() {
@@ -204,5 +205,9 @@ export class Task {
     this.target.classList.toggle("delete-border");
     title.classList.toggle("delete-background");
     comment.classList.toggle("delete-background");
+  }
+
+  handleDeleteButtonClick() {
+    deleteMenuInit(this);
   }
 }
