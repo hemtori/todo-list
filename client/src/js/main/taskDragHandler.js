@@ -47,7 +47,7 @@ const createTaskHTML = ([header, comment, author]) => {
     </section>`;
 };
 
-export const setMouseEvent = (taskItem) => {
+const setMouseEvent = (taskItem) => {
   if (isRegistrationCard(taskItem)) return;
   taskItem.addEventListener("mousedown", (event) => handleGrabbing(event));
   taskItem.addEventListener("mouseup", mouseUpHandler);
@@ -165,3 +165,5 @@ const mouseUpHandler = ({ target }) => {
 const removeDocumentEvent = () => {
   document.removeEventListener("mousemove", mouseMoveHandler);
 };
+
+export { setMouseEvent };
