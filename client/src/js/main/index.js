@@ -5,7 +5,7 @@ import * as TodoListStore from "../store/todoListStore.js";
 const createTodoList = async () => {
   const todoListData = await TodoListStore.getTodoListData();
   const parent = $(".column__list");
-  for (const list of todoListData) {
+  for (const list of todoListData.todoList) {
     new List(parent, [list.title, list.task]);
   }
 };

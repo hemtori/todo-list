@@ -3,10 +3,12 @@ import { serverURL } from "../constants/urlPath.js";
 
 let todoListData;
 
-const getTodoListData = async () => {
-  todoListData = await fetchData(`${serverURL}/todoList`);
+export const getTodoListData = async () => {
+  todoListData = await fetchData(
+    "https://raw.githubusercontent.com/hemtori/todo-list/develop3/server/data/db.json"
+  );
 
-  for (const listData of todoListData) {
+  for (const listData of todoListData.todoList) {
     let value = listData.task;
 
     Object.defineProperty(listData, "task", {
@@ -23,7 +25,7 @@ const getTodoListData = async () => {
   return todoListData;
 };
 
-const updateTodoListData = ([id, updatedList]) => {
+export const updateTodoListData = ([id, updatedList]) => {
   putData(`${serverURL}/todoList/${id}`, updatedList);
 };
 
@@ -60,7 +62,7 @@ const getTaskId = (taskList, taskTitle) => {
   return id;
 };
 
-const deleteListTask = (title, taskTitle) => {
+export const deleteListTask = (title, taskTitle) => {
   const list = todoListData.filter((e) => e.title === title)[0];
   const taskId = getTaskId(list.task, taskTitle);
   if (taskId === list.task.length) {
@@ -86,7 +88,7 @@ const deleteListTask = (title, taskTitle) => {
   ];
 };
 
-const subscribe = (key, notify = null, defaultValue = false) => {
+export const subscribe = (key, notify = null, defaultValue = false) => {
   if (activation[key] === undefined) {
     activation[key] = defaultValue;
     let value = activation[key];
@@ -112,9 +114,7 @@ const subscribe = (key, notify = null, defaultValue = false) => {
   notify && subscribers[key].push(notify);
 };
 
-const update = (key, title = null, newTask = null) => {
+export const update = (key, title = null, newTask = null) => {
   if (newTask) return (activation[key] = [activation[key] + 1, title, newTask]);
   return (activation[key] = [!activation[key], title]);
 };
-
-export { getTodoListData, updateTodoListData, deleteListTask, subscribe, update };
