@@ -1,4 +1,4 @@
-import { $$ } from "../utils/utils.js";
+import { $, $$ } from "../utils/utils.js";
 import { iconDelete } from "../constants/imagePath.js";
 import * as TodoListStore from "../store/todoListStore.js";
 import { deleteMenuInit } from "./deleteMenu.js";
@@ -74,7 +74,7 @@ export class Task {
     this.setDoubleClickEvent();
     this.setInputEvent();
     this.setKeyupEvent();
-    this.setMouseEvent(this.target);
+    this.setDeleteButtonMouseEvent();
   }
 
   setTarget() {
@@ -191,7 +191,7 @@ export class Task {
       this.target.classList.add("inactivation");
   }
 
-  setMouseEvent() {
+  setDeleteButtonMouseEvent() {
     this.deleteButton = this.target.querySelector(".column__task--delete-button");
     this.deleteButton.addEventListener("mouseover", this.handleMouseToggle.bind(this));
     this.deleteButton.addEventListener("mouseout", this.handleMouseToggle.bind(this));
@@ -199,15 +199,35 @@ export class Task {
   }
 
   handleMouseToggle() {
+    if (this.isAlertPopped()) {
+      return;
+    }
+
+    const classBackground = "delete-background";
+    const classBorder = "delete-border";
+    const classButtonHover = "delete-hover";
+
     const title = this.target.querySelector(".column__task--title");
     const comment = this.target.querySelector(".column__task--comment");
-    this.target.classList.toggle("delete-background");
-    this.target.classList.toggle("delete-border");
-    title.classList.toggle("delete-background");
-    comment.classList.toggle("delete-background");
+    const deleteButton = this.target.querySelector(".column__task--delete-button");
+
+    this.target.classList.toggle(classBackground);
+    this.target.classList.toggle(classBorder);
+    title.classList.toggle(classBackground);
+    comment.classList.toggle(classBackground);
+    deleteButton.classList.toggle(classButtonHover);
+  }
+
+  isAlertPopped() {
+    const alert = $(".dimmed");
+    return alert !== null;
   }
 
   handleDeleteButtonClick() {
-    deleteMenuInit(this);
+    deleteMenuInit({ listTitle: this.listTitle, taskTitle: this.taskTitle }, this.cancelAlert.bind(this));
+  }
+
+  cancelAlert() {
+    this.handleMouseToggle();
   }
 }
