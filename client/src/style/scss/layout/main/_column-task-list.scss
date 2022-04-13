@@ -101,13 +101,6 @@
   &--accent-button {
     background-color: $color-blue;
   }
-
-  &--delete-button {
-    &:hover {
-      cursor: pointer;
-      filter: invert(41%) sepia(95%) saturate(2569%) hue-rotate(332deg) brightness(100%) contrast(110%);
-    }
-  }
 }
 
 .section__header {
@@ -151,4 +144,9 @@
 
 .delete-background {
   background-color: $color-white-red;
+}
+
+.delete-hover {
+  cursor: pointer;
+  filter: invert(41%) sepia(95%) saturate(2569%) hue-rotate(332deg) brightness(100%) contrast(110%);
 }

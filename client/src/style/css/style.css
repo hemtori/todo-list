@@ -404,10 +404,6 @@ aside {
 .column__task--accent-button {
   background-color: #0075de;
 }
-.column__task--delete-button:hover {
-  cursor: pointer;
-  filter: invert(41%) sepia(95%) saturate(2569%) hue-rotate(332deg) brightness(100%) contrast(110%);
-}
 
 .section__header {
   width: 100%;
@@ -450,6 +446,11 @@ aside {
 
 .delete-background {
   background-color: #FFEEEC;
+}
+
+.delete-hover {
+  cursor: pointer;
+  filter: invert(41%) sepia(95%) saturate(2569%) hue-rotate(332deg) brightness(100%) contrast(110%);
 }
 
 .dimmed {
