@@ -74,7 +74,7 @@ export class Task {
     this.setDoubleClickEvent();
     this.setInputEvent();
     this.setKeyupEvent();
-    setMouseEvent(this.target);
+    this.setMouseEvent(this.target);
   }
 
   setTarget() {
@@ -189,5 +189,20 @@ export class Task {
       (this.isEditCard() && taskTitle === this.taskTitle && comment === this.comment)
     )
       this.target.classList.add("inactivation");
+  }
+
+  setMouseEvent() {
+    this.deleteButton = this.target.querySelector(".column__task--delete-button");
+    this.deleteButton.addEventListener("mouseover", this.handleMouseToggle.bind(this));
+    this.deleteButton.addEventListener("mouseout", this.handleMouseToggle.bind(this));
+  }
+
+  handleMouseToggle() {
+    const title = this.target.querySelector(".column__task--title");
+    const comment = this.target.querySelector(".column__task--comment");
+    this.target.classList.toggle("delete-background");
+    this.target.classList.toggle("delete-border");
+    title.classList.toggle("delete-background");
+    comment.classList.toggle("delete-background");
   }
 }
