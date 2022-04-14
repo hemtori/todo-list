@@ -29,8 +29,9 @@ export class List {
   }
 
   createTask(tasksData) {
-    for (const task of tasksData) {
-      new Task(this.listTitle, task);
+    for (const taskData of tasksData) {
+      const task = new Task(this.listTitle, taskData);
+      task.init();
     }
   }
 
@@ -80,7 +81,8 @@ export class List {
   }
 
   addRegistrationCard() {
-    new Task(this.listTitle);
+    const registrationCard = new Task(this.listTitle);
+    registrationCard.init();
   }
 
   removeRegistrationCard() {

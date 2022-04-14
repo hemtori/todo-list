@@ -61,7 +61,7 @@ const deleteListTask = (title, taskId) => {
     list.id,
     title,
     list.task.filter((task) => {
-      if (task.id === taskId) {
+      if (task.id == taskId) {
         return false;
       }
 

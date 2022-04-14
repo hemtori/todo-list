@@ -1,7 +1,6 @@
-import { iconDelete } from "../constants/imagePath.js";
+import { Task } from "./task.js";
 let timer;
 
-const taskItemClassName = "column__task--item";
 const taskListClassName = "column__task--list";
 
 const taskCreator = (origin) => {
@@ -18,12 +17,26 @@ const taskCreator = (origin) => {
 
 const createCopyTask = (taskElement, isMoved = false) => {
   const [sectionElement] = [...taskElement.children];
-  const copyTaskElement = document.createElement("li");
-  copyTaskElement.style.width = "308px";
+  const [header, comment, author] = [...sectionElement.children];
+  const [title] = [...header.children];
+  const listTitle = taskElement.closest(".column__item").dataset.title;
+  const taskData = {
+    id: taskElement.dataset.id,
+    title: title.value,
+    comment: comment.value,
+    author: author.value,
+  };
+
+  const copyTask = new Task(listTitle, taskData); //wow....
+
+  let copyTaskElement = document.createElement("div");
+  copyTaskElement.innerHTML = copyTask.createHTML();
+  copyTaskElement = copyTaskElement.querySelector("li");
+  copyTaskElement.style.width = `${taskElement.clientWidth}px`;
   copyTaskElement.ondragstart = () => false;
-  copyTaskElement.dataset.title = taskElement.dataset.title;
-  copyTaskElement.classList.add(taskItemClassName);
-  copyTaskElement.innerHTML = createTaskHTML([...sectionElement.children]);
+  copyTask.target = copyTaskElement;
+  copyTask.setEvents();
+
   copyTaskElement.addEventListener("mouseup", mouseUpHandler);
 
   if (!isMoved) {
@@ -31,22 +44,7 @@ const createCopyTask = (taskElement, isMoved = false) => {
   } else {
     copyTaskElement.classList.add("blur");
   }
-
-  setMouseEvent(copyTaskElement);
   return copyTaskElement;
-};
-
-const createTaskHTML = ([header, comment, author]) => {
-  const [title] = [...header.children];
-  return /* html */ `
-    <section>
-      <div class="section__header">
-        <input readonly type="text" class="column__task--title" value="${title.value}" />
-        <img src="${iconDelete}" class="column__task--delete-button" />
-      </div>
-      <textarea readonly class="column__task--comment" spellcheck="false">${comment.value}</textarea>
-      <span class="column__task--author">${author.innerText}</span>
-    </section>`;
 };
 
 const setMouseEvent = (taskItem) => {
@@ -152,7 +150,6 @@ const handleDragCard = () => {
 
 const getStandardCard = handleDragCard();
 
-//리턴값을 써야하는뎀 함수명으로 반환하니까 어색하다 8_8
 const isTask = (element) => element.closest(".column__task--item");
 
 const getElementByCoordinate = (element, { x, y }) => {
