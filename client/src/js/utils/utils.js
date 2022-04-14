@@ -36,3 +36,12 @@ export const putData = async (url, data) => {
   });
   return handleError(response);
 };
+
+export const postData = async (url, data) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return handleError(response);
+};
