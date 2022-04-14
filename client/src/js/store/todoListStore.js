@@ -51,12 +51,6 @@ const updateListTask = (title, newTask) => {
 
 const deleteListTask = (title, taskId) => {
   const list = todoListData.filter((e) => e.title === title)[0];
-  if (taskId === list.task.length) {
-    list.task.pop();
-    list.task = [list.id, title, list.task];
-    return;
-  }
-
   list.task = [
     list.id,
     title,
