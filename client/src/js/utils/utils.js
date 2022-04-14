@@ -15,7 +15,7 @@ export const debounce = (callback, delay) => {
 };
 
 const handleError = async (response) => {
-  if (response.status === 200) {
+  if (response.status >= 200 && response.status < 300) {
     const data = await response.json();
     return data;
   } else {
