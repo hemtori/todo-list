@@ -114,7 +114,7 @@ const deleteListTask = (title, taskId) => {
   ];
 };
 
-const subscribe = (key, notify = null, defaultValue = false) => {
+const subscribe = (key, notify = null, defaultValue = null) => {
   if (activation[key] === undefined) {
     activation[key] = defaultValue;
     let value = activation[key];
