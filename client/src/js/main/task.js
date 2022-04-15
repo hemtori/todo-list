@@ -193,11 +193,21 @@ export class Task {
     if (taskTitle || comment) {
       this.target.classList.remove("inactivation");
     }
-    if (
-      (!taskTitle && !comment) ||
-      (this.isEditCard() && taskTitle === this.taskTitle && comment === this.comment)
-    )
+    if (isInactivate(taskTitle, comment)) {
       this.target.classList.add("inactivation");
+    }
+  }
+
+  isEmpty(taskTitle, comment) {
+    return !taskTitle && !comment;
+  }
+
+  isSame(taskTitle, comment) {
+    return this.isEditCard() && taskTitle === this.taskTitle && comment === this.comment;
+  }
+
+  isInactivate(taskTitle, comment) {
+    return isEmpty(taskTitle, comment) || isSame(taskTitle, comment);
   }
 
   setDeleteButtonMouseEvent() {
