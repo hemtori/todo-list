@@ -79,7 +79,7 @@ const updateListTask = (title, newTask) => {
 
   if (newTask.id) {
     list.task[newTask.id - 1] = newTask;
-    actionType = "수정";
+    actionType = "변경";
   } else {
     newTask.id = list.task.length + 1;
     list.task.push(newTask);
