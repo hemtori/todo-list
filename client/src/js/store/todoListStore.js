@@ -4,7 +4,7 @@ import { serverURL } from "../constants/urlPath.js";
 let todoListData;
 let historyData;
 
-const getTodoListData = async () => {
+const fetchTodoListData = async () => {
   todoListData = await fetchData(`${serverURL}/todoList`);
 
   for (const listData of todoListData) {
@@ -19,6 +19,12 @@ const getTodoListData = async () => {
         updateTodoListData([id, { title, task: newValue }]);
       },
     });
+  }
+};
+
+const getTodoListData = async () => {
+  if (!todoListData) {
+    await fetchTodoListData();
   }
 
   return todoListData;
