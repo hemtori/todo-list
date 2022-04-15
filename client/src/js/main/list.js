@@ -15,7 +15,20 @@ export class List {
     this.createTask(this.taskData);
     this.setEvents();
     TodoListStore.subscribe("registration", this.notifyRegistration.bind(this));
-    TodoListStore.subscribe("newTask");
+    TodoListStore.subscribe("newTask", this.notifyListUpdate.bind(this));
+  }
+
+  async notifyListUpdate(id, listTitle, newTask) {
+    if (this.listTitle !== listTitle) {
+      return;
+    }
+
+    const allListData = await TodoListStore.getTodoListData();
+    const currentListData = allListData.filter((listData) => listData.title === listTitle)[0];
+    this.taskData = currentListData.task;
+    const column_list = this.target.querySelector(".column__task--list");
+    column_list.innerHTML = "";
+    this.createTask(this.taskData);
   }
 
   notifyRegistration(activation, title) {
@@ -65,6 +78,7 @@ export class List {
     for (const list of lists) {
       if (list.dataset.title === this.listTitle) {
         this.target = list;
+        return;
       }
     }
   }

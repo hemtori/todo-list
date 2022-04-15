@@ -4,7 +4,7 @@ import { serverURL } from "../constants/urlPath.js";
 let todoListData;
 let historyData;
 
-const getTodoListData = async () => {
+const fetchTodoListData = async () => {
   todoListData = await fetchData(`${serverURL}/todoList`);
 
   for (const listData of todoListData) {
@@ -20,7 +20,12 @@ const getTodoListData = async () => {
       },
     });
   }
+};
 
+const getTodoListData = async () => {
+  if (!todoListData) {
+    await fetchTodoListData();
+  }
   return todoListData;
 };
 
@@ -37,7 +42,6 @@ const getHistoryData = async () => {
       return historyList;
     },
     set: ([actionType, categories, { title }]) => {
-      debugger;
       const newHistory = {
         action: actionType,
         category: categories,
@@ -121,12 +125,14 @@ const subscribe = (key, notify = null, defaultValue = false) => {
 
       set: ([newValue, title, newTask]) => {
         value = newValue;
+
+        if (newTask) {
+          updateListTask(title, newTask);
+        }
+
         subscribers[key].forEach((notify) => {
           notify(activation[key], title, newTask);
         });
-
-        if (!newTask) return;
-        updateListTask(title, newTask);
       },
     });
   }
