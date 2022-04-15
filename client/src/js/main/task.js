@@ -31,12 +31,7 @@ export class Task {
     }
   }
 
-  createHTML(taskData) {
-    if (taskData) {
-      const { title, comment, author, id } = taskData;
-      [this.taskTitle, this.comment, this.author, this.taskId] = [title, comment, author, id];
-    }
-
+  createHTML() {
     return this.taskId
       ? `<li class="column__task--item" data-title="${this.taskTitle}" data-id="${this.taskId}">
               <section>
