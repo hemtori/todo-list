@@ -110,9 +110,10 @@ export class Task {
   handleClickEvent(target) {
     if (!this.isTaskButton(target)) return;
 
-    if (this.isCancelButton(target))
+    if (this.isCancelButton(target)) {
       if (this.isRegistrationCard()) return this.removeRegistrationCard();
-      else if (this.isEditCard()) return this.restoreOriginCard();
+      return this.restoreOriginCard();
+    }
 
     if (this.isInactivation()) return;
 
