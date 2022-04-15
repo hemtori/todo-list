@@ -33,7 +33,7 @@ const handleCancelButtonClick = ({ target }, notify) => {
 
 const handleDeleteButtonClick = ({ target }, { listTitle, taskId }) => {
   TodoListStore.deleteListTask(listTitle, taskId);
-  TodoListStore.update("newTask", title);
+  TodoListStore.update("newTask", listTitle);
   removeAlert(target);
 };
 
